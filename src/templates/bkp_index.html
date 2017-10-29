@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AJVS Home Server</title>
+<link rel="stylesheet" type="text/css" href="/static/style1.css">
+</head>
+<body>
+<div class="page-wrapper">
+<section class="intro" id="zen-intro">
+	<header role="banner">
+		<h1>AJVS Home Server</h1>
+		<h2>Documentation of the home network at Rosalia.</h2>
+	</header>
+
+<div class="summary" id="zen-summary" role="article">
+This site is being served from the Raspberry Pi in AaiBaba's room at 10.1.10.10. 
+This file is at /storage/website/templates/index.html
+</div>
+</section>
+<div class="participation" id="zen-participation" role="article">
+<h3>
+Recipes
+</h3>
+Jiten and Alicia's tasty <a href="/recipes">recipes.</a>
+You can edit and save these <a href="/new_recipes">recipes.</a>
+<p>
+</div>
+
+<div class="participation" id="zen-participation" role="article">
+<h3>
+HTTP daemon setup on 10.1.10.10 (aaibabaroompi)
+</h3>
+I have installed tornado and mako. The http daemon script is at /storage/website/application.py.
+This is started on reboot from /storage/.config/startup.sh. No logs are currently written.
+<p>
+<h3>
+FTP daemon setup on 10.1.10.10 (aaibabaroompi)
+</h3>
+<p>I have installed pythonftpdlib. The ftp daemon script is at /storage/bin/openelecftpd.
+This is started on reboot from /storage/.config/startup.sh. No logs are currently written.<br>
+Username: guest, Password: guest, Directory: /media/mmcblk0p3-mmc-SU08G_0x1cb3022d/Scans which is exported using Samba.
+</p>
+<h3>
+Scan to FTP setup on 10.1.10.9 (BROTHER-MFC)
+</h3>
+Using the web interface at <a href="http://10.1.10.9">http://10.1.10.9</a> I have set up the Scan To FTP function to use the FTP server on 10.1.10.10 above. 
+You can scan to the profile 'aaibabaroompi' and the pdfs will be visible in the Scans folder
+via Samba.
+<h3>
+Static endpoints
+</h3>
+<p>
+The DHCP server runs on the Comcast Cable Modem at 10.1.10.1.
+Addresses up to 10.1.10.19 are reserved as static addresses.
+</p>
+<table border=1>
+<tr><td>10.1.10.1</td><td><a href="http://10.1.10.1">Comcast Cable Modem (server closet)</a></td></tr>
+<tr><td>10.1.10.2</td><td><a href="http://10.1.10.2">Wireless Router (upstairs landing)</a></td></tr>
+<tr><td>10.1.10.3</td><td><a href="http://10.1.10.3">Wireless Router (media room)</a></td></tr>
+<tr><td>10.1.10.4</td><td><a href="http://10.1.10.4">Wireless Router (server closet)</a></td></tr>
+<tr><td>10.1.10.5</td><td><a href="http://10.1.10.5">Unassigned 10.1.10.5</a></td></tr>
+<tr><td>10.1.10.6</td><td><a href="http://10.1.10.6">Unassigned 10.1.10.6</a></td></tr>
+<tr><td>10.1.10.7</td><td><a href="http://10.1.10.7">Unassigned 10.1.10.7</a></td></tr>
+<tr><td>10.1.10.8</td><td><a href="http://10.1.10.8">Unassigned 10.1.10.8</a></td></tr>
+<tr><td>10.1.10.9</td><td><a href="http://10.1.10.9">Brother MFC Printer (server closet)</a></td></tr>
+<tr><td>10.1.10.10</td><td><a href="http://10.1.10.10">Raspberry PI (AaiBaba room)</a></td></tr>
+<tr><td>10.1.10.11</td><td><a href="http://10.1.10.11">Raspbian Raspberry PI (media room)</a></td></tr>
+<tr><td>10.1.10.12</td><td><a href="http://10.1.10.12">Amazon Firestick (media room)</a></td></tr>
+<tr><td>10.1.10.13</td><td><a href="http://10.1.10.13">Kodi Raspberry Pi Model B (media room)</a></td></tr>
+<tr><td>10.1.10.14</td><td><a href="http://10.1.10.14">Unassigned 10.1.10.14</a></td></tr>
+<tr><td>10.1.10.15</td><td><a href="http://10.1.10.15">Unassigned 10.1.10.15</a></td></tr>
+<tr><td>10.1.10.16</td><td><a href="http://10.1.10.16">Unassigned 10.1.10.16</a></td></tr>
+<tr><td>10.1.10.17</td><td><a href="http://10.1.10.17">Unassigned 10.1.10.17</a></td></tr>
+<tr><td>10.1.10.18</td><td><a href="http://10.1.10.18">Unassigned 10.1.10.18</a></td></tr>
+<tr><td>10.1.10.19</td><td><a href="http://10.1.10.19">Unassigned 10.1.10.19</a></td></tr>
+</table>
+
+</div>
+</div>
+
+</body>
+</html>
+

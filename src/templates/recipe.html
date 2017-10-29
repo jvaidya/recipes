@@ -1,0 +1,65 @@
+<%
+import os
+import recipes
+base_dir = os.path.dirname(os.path.abspath(recipes.__file__))
+filename = os.path.join(base_dir, arguments['filename'][0])
+action = arguments['action'][0]
+recipe = recipes.read_json(filename)
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>${recipe['title']}</title>
+<link rel="stylesheet" media="screen" type="text/css" href="/static/style1.css">
+</head>
+<body>
+<div class="page-wrapper">
+
+<H3>${recipe['title']}</H3><br><HR>
+
+<table BORDER=2 CELLSPACING=5>
+<tr>
+<td VALIGN=top>
+
+<B>Ingredients:</B><BR>
+<table CELLSPACING=10>
+% for i in recipe['ingredients']:
+%   if i['measure'] == "SectionHeading":
+      </table><BR>
+      <B><I>${i['comment']}</B></I><BR>
+      <table CELLSPACING=10><BR>
+%    else:
+	<tr>
+	<td>${i['amount']}</td>
+	<td>${i['measure']}</td>
+%       if i['comment'] and i['comment'] != 'NIL':
+	  <td>${i['ingredient']}, ${i['comment']}</td>
+%       else:
+	  <td>${i['ingredient']}</td>
+        </tr>
+%       endif
+%   endif
+% endfor
+
+    </table><BR>
+
+    </td>
+    <td VALIGN=top>
+
+    <B>Directions:</B><BR><BR>
+    <table CELLSPACING=10>
+%    for cnt,i in enumerate(recipe['directions']):
+	<tr>
+	<td>${cnt + 1}.</td>
+	<td>${i['text']}</td>
+	</tr>
+%    endfor
+    </table>
+
+    </td>
+    </tr>
+    </table>
+
+
+
+

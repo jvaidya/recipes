@@ -1,0 +1,29 @@
+<%
+import os
+import recipes
+base_dir = os.path.dirname(os.path.abspath(recipes.__file__))
+url = 'http://%s/recipe' % recipes.hostname
+list_file = os.path.join(base_dir, 'data/ro/recipe_list.json')
+list = recipes.read_json(list_file)
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>AJVS Home Server</title>
+<link rel="stylesheet" media="screen" type="text/css" href="/static/style1.css">
+</head>
+<body>
+<div class="page-wrapper">
+<table BORDER=1>
+% for l in list:
+	<tr>
+	<td>
+	<A HREF="${url}?action=show&filename=data/ro/${l['filename']}">${l['title']}</A><BR>
+	</td>
+	</tr>
+% endfor
+
+</table>
+</body>
+</html>
+

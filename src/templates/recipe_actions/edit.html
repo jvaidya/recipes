@@ -1,0 +1,86 @@
+<%
+import os
+import recipes_with_save as recipes
+base_dir = os.path.dirname(os.path.abspath(recipes.__file__))
+filename = os.path.join(base_dir, arguments['filename'][0])
+action = arguments['action'][0]
+recipe = recipes.read_json(filename)
+measures = ['t.', 'T.', 'Cup'] + sorted(["Ounce","Pound","Gram","Inch","Square Inch","Pieces","Count","SectionHeading","Gallon","Pint","Pinch"])
+edit_row_header = ("<B>Num</B>","<B>Amount</B>","<B>Measure</B>","<B>Ingredient</B>","<B>Comment</B>")
+form_url = '/new_recipe?action=save&filename=%s' % arguments['filename'][0] 
+%>
+<%def name="print_row(input_list)">
+    <tr>
+% for a in input_list:
+    <td>${a}</td>
+% endfor
+    </tr>
+</%def>
+<!DOCTYPE html>
+<html>
+<head>
+<title>${recipe['title']}</title>
+<link rel="stylesheet" media="screen" type="text/css" href="/static/style1.css">
+</head>
+<body>
+	<div class="page-wrapper">
+
+<form name="edit_recipe" method="POST" action="${form_url}">
+<H2>${recipe['title']}</H2><HR>
+   <B>Title:</B> <input type="text" size="125" name="recipe_title" value="${recipe['title']}"><p>
+
+<table BORDER=2 CELLSPACING=5>
+<td VALIGN=top>
+
+<B>Ingredients:</B><BR>
+<table CELLSPACING=10>
+        ${print_row(edit_row_header)}
+% for cnt, i in enumerate(recipe.get('ingredients', [recipes.empty_ingredient()])):
+	<tr>
+	<td><input type="text" size="3" name="number_${i['ord']}" value="${cnt +1}"></td>
+	<td><input type="text" size="5" name="amount_${i['ord']}" value="${i['amount']}"></td>
+        <td>
+            <select name="measure_${i['ord']}" selected="${i['measure']}">
+%           for m in measures:
+%           if m == i['measure']:
+                <option value="${m}" selected="selected">${m}</option>
+%           else:
+                <option value="${m}">${m}</option>
+%           endif
+%           endfor
+            </select>
+        </td>
+	  <td><input type="text" size="10" name="ingredient_${i['ord']}" value="${i['ingredient']}"></td>
+	  <td><input type="text" size="15" name="comment_${i['ord']}" value="${i['comment']}"></td>
+        </tr>
+% endfor
+    <tr><td>Row Count:</td><td><input type="text" size="5" name="row_count" value="${len(recipe.get('ingredients',[1]))}"></td></tr>
+
+    </table><BR>
+    
+    </td>
+    <td VALIGN=top>
+
+    <B>Directions:</B><BR><BR>
+    <table CELLSPACING=10>
+     ${print_row(("<B>Step</B>","<B>Text</B>"))}
+%    for cnt, i in enumerate(recipe.get('directions', [recipes.empty_directions()])):
+	<tr>
+	<td><input type="text" name="step_${i['ord']}" value="${cnt + 1}"></td>
+	<td><input type="text" name="text_${i['ord']}" value="${i['text']}" size="120"></td>
+	</tr>
+%    endfor
+    <tr><td>Row Count:</td><td><input type="text" size="5" name="direction_row_count" value="${len(recipe.get('directions',[1]))}"></td></tr>
+    </table>
+
+    </td>
+    </tr>
+    </table>
+<br>
+<input type="submit" name="submit" value="Submit" />
+<input type="submit" name="next" value="Next" />
+</form>
+</body>
+</html>
+
+

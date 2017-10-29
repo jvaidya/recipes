@@ -1,0 +1,48 @@
+<%
+import os
+import recipes_with_save as recipes
+base_dir = os.path.dirname(os.path.abspath(recipes.__file__))
+action = arguments['action'][0] if arguments.get('action') else None
+if action == 'remove':
+    filename = arguments['filename'][0]
+    recipes.delete_recipe(filename)
+if action == 'copy':
+    filename = arguments['filename'][0]
+    recipes.copy_recipe(filename)
+
+url = 'http://%s/new_recipe' % recipes.hostname
+list_file = os.path.join(base_dir, 'data/rw/recipe_list.json')
+list = recipes.read_json(list_file)
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>AJVS Home Server</title>
+<link rel="stylesheet" media="screen" type="text/css" href="/static/style1.css">
+</head>
+<body>
+<div class="page-wrapper">
+
+<table BORDER=1>
+% for l in list:
+	<tr>
+	<td>
+	<A HREF="${url}?action=show&filename=data/rw/${l['filename']}">${l['title']}</A><BR>
+	</td>
+	<td>
+	<A HREF="${url}?action=edit&filename=data/rw/${l['filename']}">Edit</A><BR>
+	</td>
+	<td>
+	<A HREF="?action=copy&filename=data/rw/${l['filename']}">Copy</A><BR>
+	</td>
+	<td>
+	<A HREF="?action=remove&filename=data/rw/${l['filename']}">Remove</A><BR>
+	</td>
+	</tr>
+% endfor
+
+</table>
+</body>
+</html>
+

@@ -1,0 +1,14 @@
+<%
+import os
+import recipes_with_save as recipes
+base_dir = os.path.dirname(os.path.abspath(recipes.__file__))
+action = arguments['action'][0]
+filename = arguments['filename'][0]
+recipe_file = os.path.join(base_dir, filename)
+recipe = recipes.read_json(recipe_file)
+%>
+
+<%include file="${'recipe_actions/%s.html' % action}"/>
+
+
+

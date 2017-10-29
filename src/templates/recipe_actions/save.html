@@ -1,0 +1,14 @@
+<%
+import os
+import recipes_with_save as recipes
+base_dir = os.path.dirname(os.path.abspath(recipes.__file__))
+filename = os.path.join(base_dir, arguments['filename'][0])
+recipes.save_recipe(arguments, filename)
+next_step = "show.html"
+if arguments.get("next"):
+    next_step = "edit.html"
+%>
+<%include file="${next_step}"/>
+
+
+
